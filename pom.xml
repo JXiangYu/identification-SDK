@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.halxy</groupId>
     <artifactId>digital-identification-sdk</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 
     <name>digital-identification-sdk</name>
     <description>A plug for IODSYS extension</description>
@@ -36,6 +36,17 @@
             <organization>halxy</organization>
         </developer>
     </developers>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <java.version>1.8</java.version>
@@ -84,6 +95,34 @@
             <version>4.12</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <profiles>
         <profile>
             <id>release</id>
@@ -108,7 +147,6 @@
                             <failOnError>false</failOnError>
                         </configuration>
                     </plugin>
-
                     <!-- 打包resources -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -123,19 +161,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
-                    <!-- 打包源码 -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.8.0</version>
-                        <configuration>
-                            <source>${java.version}</source>
-                            <target>${java.version}</target>
-                            <showWarnings>true</showWarnings>
-                        </configuration>
-                    </plugin>
-
                     <!-- gpg认证 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -162,18 +187,7 @@
                         </configuration>
                     </plugin>
                 </plugins>
-                <defaultGoal>compile</defaultGoal>
             </build>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>ossrh</id>
-                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-                </snapshotRepository>
-                <repository>
-                    <id>ossrh</id>
-                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
         </profile>
     </profiles>
 </project>
