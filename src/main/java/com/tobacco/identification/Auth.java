@@ -1,6 +1,6 @@
 package com.tobacco.identification;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.tobacco.identification.Model.SimpleLoginModel;
 import com.tobacco.identification.utils.ReadFileUtil;
 import com.tobacco.identification.utils.RestJsonApi;
